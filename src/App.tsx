@@ -65,13 +65,23 @@ function App() {
               <a href="#features" className="text-gray-600 hover:text-primary transition-colors">Features</a>
               <a href="#framework" className="text-gray-600 hover:text-primary transition-colors">Framework</a>
               <a href="#pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</a>
-              <Button 
-                variant="outline" 
-                className="mr-2"
-                onClick={() => setCurrentView('dashboard')}
-              >
-                Dashboard
-              </Button>
+              {user ? (
+                <Button 
+                  variant="outline" 
+                  className="mr-2"
+                  onClick={() => setCurrentView('dashboard')}
+                >
+                  Dashboard
+                </Button>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="mr-2"
+                  onClick={() => blink.auth.login()}
+                >
+                  Sign In
+                </Button>
+              )}
               <Button>Get Demo</Button>
             </div>
           </div>
@@ -92,8 +102,12 @@ function App() {
               so you can focus on the new things you'll be doing in 10 years.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-4">
-                Get a Demo
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4"
+                onClick={() => user ? setCurrentView('dashboard') : blink.auth.login()}
+              >
+                {user ? 'Go to Dashboard' : 'Get Started'}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button variant="outline" size="lg" className="text-lg px-8 py-4">
